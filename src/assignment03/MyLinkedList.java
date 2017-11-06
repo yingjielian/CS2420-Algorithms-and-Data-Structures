@@ -1,4 +1,8 @@
 package assignment03;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * This class is the MyLinked list , this class implements UtahList 
  * 
@@ -7,7 +11,7 @@ package assignment03;
  * 
  */
 
-public class MyLinkedList<E> implements UtahList<E> {
+public class MyLinkedList<E> implements UtahList<E>, Iterable<E> {
 	Node<E> head;
 	Node<E> tail;
 	int ModificationCount = 0;
@@ -22,6 +26,11 @@ public class MyLinkedList<E> implements UtahList<E> {
 			this.data = _data;
 			this.previous = _previous;
 			this.next = _next;
+		}
+
+		public void unlink() {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	/**
@@ -235,6 +244,43 @@ public class MyLinkedList<E> implements UtahList<E> {
 	public void resetModificationCount() {
 		ModificationCount = 0;
 
+	}
+	@Override
+	public Iterator<E> iterator() {
+		// TODO Auto-generated method stub
+		return new Iterator<E>(){
+
+			Node current = head;
+			boolean newxBeenCalledEh = false;
+			
+			@Override
+			public boolean hasNext() {
+				
+				return current != null;
+			}
+
+			@Override
+			public E next() {
+				if(!hasNext())
+					throw new NoSuchElementException();
+				
+				E elementToReturn = (E) current.data;
+				
+				current = current.next;
+				newxBeenCalledEh = true;
+				return   elementToReturn;
+			}
+			
+			@Override
+			public void remove(){
+				if(!newxBeenCalledEh)
+					throw new IllegalStateException();
+				
+				current.unlink(); // Need to write a unlink method
+				newxBeenCalledEh = false;
+			}
+			
+		};
 	}
 
 }
