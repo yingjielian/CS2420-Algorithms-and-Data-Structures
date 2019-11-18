@@ -1,0 +1,4 @@
+digraph BST {
+node [shape=record]
+w[label="<L> |<D> w|<R> "]
+}

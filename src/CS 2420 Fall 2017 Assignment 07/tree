@@ -1,0 +1,10 @@
+digraph BST {
+node [shape=record]
+a[label="<L> |<D> a|<R> "]
+b[label="<L> |<D> b|<R> "]
+c[label="<L> |<D> c|<R> "]
+d[label="<L> |<D> d|<R> "]
+c:R -> d:D
+b:R -> c:D
+a:R -> b:D
+}
